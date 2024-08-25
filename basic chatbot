@@ -1,0 +1,52 @@
+//basic chatbot//
+# Import the necessary libraries
+import random
+
+# Define the chatbot's responses
+responses = {
+    "hello": ["Hello!", "Hi! How are you?", "Hey! What's up?"],
+    "goodbye": ["Goodbye! See you later!", "See you soon!"],
+    "how are you": ["I'm doing well, thanks! How about you?", "I'm doing great, thanks!"],
+    "what's your name": ["My name is ChatBot, nice to meet you!", "I don't have a name, but I'm here to help you!"]
+}
+
+# Define the chatbot's name
+chatbot_name = "ChatBot"
+
+# Define the user's input
+user_input = ""
+
+# Define the chatbot's response
+chatbot_response = ""
+
+# Main loop
+while True:
+    # Get the user's input
+    user_input = input("You: ")
+
+    # Check if the user wants to exit
+    if user_input.lower() == "quit":
+        break
+
+    # Check if the user wants to ask a question
+    if user_input.startswith("what"):
+        words = user_input.split()
+        if words[1].lower() in responses:
+            chatbot_response = random.choice(responses[words[1].lower()])
+        else:
+            chatbot_response = "Sorry, I didn't understand that. Try again!"
+
+    # Check if the user wants to say hello
+    elif user_input.lower() == "hello":
+        chatbot_response = random.choice(responses["hello"])
+
+    # Check if the user wants to say goodbye
+    elif user_input.lower() == "goodbye":
+        chatbot_response = random.choice(responses["goodbye"])
+
+    # Default response
+    else:
+        chatbot_response = "Sorry, I didn't understand that. Try again!"
+
+    # Print the chatbot's response
+    print(f"{chatbot_name}: {chatbot_response}")
