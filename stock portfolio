@@ -1,0 +1,74 @@
+//stock porfolio project//
+# Stock Portfolio Tracker
+
+# Dictionary to store stock information
+stock_dict = {}
+
+# Dictionary to store stock prices
+stock_prices = {}
+
+# Function to add a new stock
+def add_stock():
+    symbol = input("Enter the stock symbol (e.g. AAPL, MSFT, etc.): ")
+    quantity = float(input("Enter the quantity of the stock: "))
+    if symbol in stock_dict:
+        print("Stock already exists in the portfolio. Please update the quantity.")
+    else:
+        stock_dict[symbol] = {"quantity": quantity}
+        print("Stock added to the portfolio.")
+
+# Function to remove a stock
+def remove_stock():
+    symbol = input("Enter the stock symbol to remove: ")
+    if symbol in stock_dict:
+        del stock_dict[symbol]
+        print("Stock removed from the portfolio.")
+    else:
+        print("Stock not found in the portfolio.")
+
+# Function to update stock prices
+def update_prices():
+    print("Enter the current price for each stock (or 'q' to quit):")
+    for symbol in stock_dict:
+        price = float(input(f"{symbol}: "))
+        if price == 0:
+            print("Invalid price. Please enter a non-zero value.")
+        else:
+            stock_prices[symbol] = price
+    print("Stock prices updated.")
+
+# Function to display the current portfolio value
+def display_portfolio():
+    total_value = 0
+    print("Current Portfolio:")
+    for symbol in stock_dict:
+        quantity = stock_dict[symbol]["quantity"]
+        price = stock_prices.get(symbol, 0)
+        value = quantity * price
+        total_value += value
+        print(f"{symbol}: {quantity} x {price:.2f} = {value:.2f}")
+    print(f"Total Portfolio Value: {total_value:.2f}")
+
+# Main program loop
+while True:
+    print("\nStock Portfolio Tracker")
+    print("1. Add a new stock")
+    print("2. Remove a stock")
+    print("3. Update stock prices")
+    print("4. Display current portfolio value")
+    print("5. Quit")
+    choice = input("Enter your choice (1-5): ")
+    if choice == "1":
+        add_stock()
+    elif choice == "2":
+        remove_stock()
+    elif choice == "3":
+        update_prices()
+    elif choice == "4":
+        display_portfolio()
+    elif choice == "5":
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+print("Goodbye!")
